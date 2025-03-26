@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 
 <head>
   <meta charset="UTF-8">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
 
@@ -14,18 +14,14 @@
 
     <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
 
-
-
-  
     <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
 
-
   <title>Squid Game Landing Page</title>
-
-    <link rel="canonical" href="https://codepen.io/CodingDecoding/pen/XWaxvWa">
+  <link rel="canonical" href="https://codepen.io/CodingDecoding/pen/XWaxvWa">
   
-  
-  
+  <!-- Add Slick Carousel CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
   
 <style>
 * {
@@ -43,23 +39,18 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
+  min-height: 100vh;
   font-family: Poppins;
   color: #fff;
 }
 
-
-
-
 .main {
-  height: 100vh;
- 
+  min-height: 100vh;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 50px;
 }
-
-
 
 .social-buttons {
     position: fixed;
@@ -94,25 +85,168 @@ p {
   text-align: justify;
 }
 
+/* Squid Game Style Carousel */
+.sponsors-section {
+  margin: 40px 0;
+  position: relative;
+}
 
-@media (min-width:320px)  {p,h1 {width: 100% !important;} h1{font-size: 30px;} /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ }
-@media (min-width:480px)  {p,h1 {width: 100% !important;;} h1{font-size: 30px;} /* smartphones, Android phones, landscape iPhone */ }
-@media (min-width:600px)  {p,h1 {width: 70% !important;;} h1{font-size: 30px;} /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones*/ }
-@media (min-width:801px)  {p,h1 {width: 70% !important;;} h1{font-size: 40px;} /* tablet, landscape iPad, lo-res laptops ands desktops */ }
-@media (min-width:1025px) {p,h1 {width: 50% !important;;} h1{font-size: 50px;} /* big landscape tablets, laptops, and desktops */ }
-@media (min-width:1281px) {p,h1 {width: 40% !important;;} h1{font-size: 50px;} /* hi-res laptops and desktops */ }
+.sponsors-title {
+  color: #ff005d;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
 
+.sponsors-carousel {
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.sponsor-slide {
+  padding: 0 15px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.sponsor-slide:hover {
+  transform: scale(1.05);
+}
+
+.sponsor-logo {
+  max-width: 150px;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 5px rgba(229, 9, 20, 0.7));
+  transition: filter 0.3s;
+}
+
+.sponsor-logo:hover {
+  filter: drop-shadow(0 0 10px rgba(229, 9, 20, 1));
+}
+
+/* Squid Game mask pattern overlay */
+.sponsors-carousel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(135deg, rgba(229, 9, 20, 0.1) 25%, transparent 25%) -50px 0,
+    linear-gradient(225deg, rgba(229, 9, 20, 0.1) 25%, transparent 25%) -50px 0,
+    linear-gradient(315deg, rgba(229, 9, 20, 0.1) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(229, 9, 20, 0.1) 25%, transparent 25%);
+  background-size: 100px 100px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Carousel arrows */
+.slick-prev, .slick-next {
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.slick-prev:before, .slick-next:before {
+  font-size: 40px;
+  color: #E50914;
+  opacity: 0.8;
+}
+
+.slick-prev {
+  left: -50px;
+}
+
+.slick-next {
+  right: -50px;
+}
+
+/* Carousel dots */
+.slick-dots li button:before {
+  color: #E50914;
+  opacity: 0.5;
+  font-size: 10px;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #E50914;
+  opacity: 1;
+}
+
+@media (min-width:320px)  {
+  p,h1 {width: 100% !important;} 
+  h1{font-size: 30px;}
+  .sponsors-carousel {
+    width: 90%;
+  }
+  .sponsor-logo {
+    max-width: 100px;
+    max-height: 60px;
+  }
+  .slick-prev {
+    left: -30px;
+  }
+  .slick-next {
+    right: -30px;
+  }
+}
+
+@media (min-width:480px)  {
+  p,h1 {width: 100% !important;} 
+  h1{font-size: 30px;}
+}
+
+@media (min-width:600px)  {
+  p,h1 {width: 70% !important;} 
+  h1{font-size: 30px;}
+  .sponsors-carousel {
+    width: 80%;
+  }
+  .sponsor-logo {
+    max-width: 120px;
+    max-height: 70px;
+  }
+}
+
+@media (min-width:801px)  {
+  p,h1 {width: 70% !important;} 
+  h1{font-size: 40px;}
+}
+
+@media (min-width:1025px) {
+  p,h1 {width: 50% !important;} 
+  h1{font-size: 50px;}
+  .sponsors-carousel {
+    width: 70%;
+  }
+  .sponsor-logo {
+    max-width: 150px;
+    max-height: 80px;
+  }
+}
+
+@media (min-width:1281px) {
+  p,h1 {width: 40% !important;} 
+  h1{font-size: 50px;}
+}
 
 @media only screen and (max-width: 600px) {
-p,h1 {width: 100%;}
-h1{font-size: 30px;}
+  p,h1 {width: 100%;}
+  h1{font-size: 30px;}
 }
 
 @media only screen and (max-width: 800px) {
-p,h1 {width: 70%;}
-h1{font-size: 30px;}
+  p,h1 {width: 70%;}
+  h1{font-size: 30px;}
 }
-
 
 span {
   font-size: 18px;
@@ -139,19 +273,38 @@ a {
   border-radius: 100px;
   font-size: 20px;
 }
+.sponsors-section {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .sponsors-carousel {
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+  
+  .sponsor-slide {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    margin-bottom: 50px;
+  }
 </style>
 
   <script>
   window.console = window.console || function(t) {};
 </script>
 
-  
-  
 </head>
 
 <body translate="no">
 
     <div class="social-buttons">
+        <a href="https://www.tiktok.com/@lojtari_fundit" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok">
+        </a>
         <a href="https://www.instagram.com/lojtari_fundit/" target="_blank">
           <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
         </a>
@@ -160,21 +313,104 @@ a {
   <div class="main">
   <img src="https://lh5.googleusercontent.com/S8puEvj6t7bo5H_KG2U95V7c1c9sKWwhhKsF0XG9al0yIjMnb94DKxK5DNcg1qEaD89FuUGZ2inKUTQLs5RKBAhnwRMAD35tFWmPU5JxVCcbWMzmOIbF7REzB7liaZWcfSjLpHWxEiw=w365" style="width:8%">
   <h1>Real Life</h1>
-<h1>Squid Game Albania</h1>
+  <h1>Squid Game Albania</h1>
   <p>
     Get ready for an unforgettable experience with Squid Game Albania! The first-ever university edition of the globally popular game is coming to your campus, where students will compete in thrilling challenges for incredible prizes. Applications are now open, and you don't want to miss your chance to be part of this exciting and intense adventure! Join the first Squid Game event in Albania—be brave, be strategic, and claim victory!
   </p>
   <br>
   <h2><strong><i>[Play hard & win big! April 30, 2025]</i></strong></h2>
-
-
   <span class="iko">@Epoka University Campus</span>
- 
- 
- <a href="https://www.lojtarifundit.com/apply">Join Now</a>
-</div>
   
-      <script id="rendered-js" >
+  
+ <a href="https://www.lojtarifundit.com/apply">Join Now</a>
+  <!-- Sponsors Carousel Section -->
+  <div class="sponsors-section" style="margin-top: 40px;">
+    <h3 class="sponsors-title">OUR SPONSORS</h3>
+    <div class="sponsors-carousel" style="padding: 20px 0;">
+      <!-- Sponsor 1 -->
+      <div class="sponsor-slide">
+        <a href="https://www.instagram.com/copiercomputercenter/?hl=en" target="_blank">
+          <img src="https://lh5.googleusercontent.com/YAJwGEtV93D8y3nD2q-XTlnDFXNXDG_ZKKIY1Y4cbJ60R0DKxPFaXixIXy6QazaUlQv7hp8aAIrrZpKyzFqhjwbI1FWtJwtgPuOgfDrxDsu0ySWOaRspJSnXrmRV9cdOQcB1b_JAqtk=w740" alt="Sponsor 1" class="sponsor-logo">
+        </a>
+      </div>
+   
+   
+         <!-- Sponsor 1 -->
+      <div class="sponsor-slide">
+        <a href="https://www.instagram.com/copiercomputercenter/?hl=en" target="_blank">
+          <img src="https://lh5.googleusercontent.com/YAJwGEtV93D8y3nD2q-XTlnDFXNXDG_ZKKIY1Y4cbJ60R0DKxPFaXixIXy6QazaUlQv7hp8aAIrrZpKyzFqhjwbI1FWtJwtgPuOgfDrxDsu0ySWOaRspJSnXrmRV9cdOQcB1b_JAqtk=w740" alt="Sponsor 1" class="sponsor-logo">
+        </a>
+      </div>
+      
+      
+            <!-- Sponsor 1 -->
+      <div class="sponsor-slide">
+        <a href="https://www.instagram.com/copiercomputercenter/?hl=en" target="_blank">
+          <img src="https://lh5.googleusercontent.com/YAJwGEtV93D8y3nD2q-XTlnDFXNXDG_ZKKIY1Y4cbJ60R0DKxPFaXixIXy6QazaUlQv7hp8aAIrrZpKyzFqhjwbI1FWtJwtgPuOgfDrxDsu0ySWOaRspJSnXrmRV9cdOQcB1b_JAqtk=w740" alt="Sponsor 1" class="sponsor-logo">
+        </a>
+      </div>
+   
+         <!-- Sponsor 1 -->
+      <div class="sponsor-slide">
+        <a href="https://www.instagram.com/copiercomputercenter/?hl=en" target="_blank">
+          <img src="https://lh5.googleusercontent.com/YAJwGEtV93D8y3nD2q-XTlnDFXNXDG_ZKKIY1Y4cbJ60R0DKxPFaXixIXy6QazaUlQv7hp8aAIrrZpKyzFqhjwbI1FWtJwtgPuOgfDrxDsu0ySWOaRspJSnXrmRV9cdOQcB1b_JAqtk=w740" alt="Sponsor 1" class="sponsor-logo">
+        </a>
+      </div>
+      
+            <!-- Sponsor 1 -->
+      <div class="sponsor-slide">
+        <a href="https://www.instagram.com/copiercomputercenter/?hl=en" target="_blank">
+          <img src="https://lh5.googleusercontent.com/YAJwGEtV93D8y3nD2q-XTlnDFXNXDG_ZKKIY1Y4cbJ60R0DKxPFaXixIXy6QazaUlQv7hp8aAIrrZpKyzFqhjwbI1FWtJwtgPuOgfDrxDsu0ySWOaRspJSnXrmRV9cdOQcB1b_JAqtk=w740" alt="Sponsor 1" class="sponsor-logo">
+        </a>
+      </div>
+      
+   
+    </div>
+  </div>
+ 
+
+</div>
+
+<!-- Add jQuery and Slick Carousel JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+<script>
+$(document).ready(function(){
+  $('.sponsors-carousel').slick({
+    dots: true,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  });
+});
+
 var elem = document.documentElement;
 
 function openFullscreen() {
@@ -190,11 +426,7 @@ function openFullscreen() {
 window.onload = function () {
   openFullscreen();
 };
+</script>
 
-//# sourceURL=pen.js
-    </script>
-
-  
 </body>
-
 </html>
