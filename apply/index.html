@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Squid Game Albania</title>
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+  <meta name="apple-mobile-web-app-title" content="CodePen">
+  <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+  <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+  <link rel="canonical" href="https://codepen.io/cjr85/pen/bGrRBYZ">
+
+
+  <!-- Styles -->
+<!-- Custom Font -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Game+Of+Squids&display=swap');
+  </style>
+
+  <!-- Styles -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Game Of Squids', sans-serif;
+    }
+    p {
+        font-size: 20px; /* Increased font size */
+        color: white;
+        text-align: center;
+      }
+      
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 99.99vh;
+      display: flex;
+      z-index: 1; /* Ensure main content is behind modal */
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: 10px 10px;
+      background: #895445;
+      background-image: url("https://lh3.googleusercontent.com/DEw0tNl9JIcHteD6eRCEULk2kPQ0v0CS-rwk_7_Ynmr0yLmnncCEuAZ0iLyP4r4Hjh1b3IpFPsckB1UAYg5ya-xF5IVwIN4XMz495g7ogb0awBGg6DC9kQXk0LuurpMFvT5tBhBOUKs=w740");
+      background-size: cover;
+      filter: blur(0px);
+      opacity: 20%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      z-index: -1;
+    }
+
+    .container .card {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+      transition: 0.5s ease-in-out;
+      overflow: hidden;
+      z-index: 1;
+      flex-direction: column;
+      border: 10px;
+    }
+
+    .container .card:hover {
+      flex-grow: 3;
+      background: #0000008f;
+      font-size: 6vw;
+    }
+
+    .container .card ion-icon {
+      font-size: 15vw;
+      color: #1a1a1a;
+      transition: 0.5s ease-in-out;
+    }
+
+    .container .card:hover ion-icon {
+      color: #fff;
+      font-size: 25vw;
+      filter: drop-shadow(0 0 10px #ea4884), drop-shadow(0 0 30px #ea4884),
+        drop-shadow(0 0 60px #ea4884), drop-shadow(0 0 100px #ea4884),
+        drop-shadow(0 0 150px #ea4884);
+    }
+
+    .sq_color {
+      color: #eb4965;
+      font-weight: bold;
+    }
+
+    img {
+      clip-path: ellipse(50% 50%);
+    }
+
+    div:where(.swal2-container) div:where(.swal2-html-container) {
+      font-family: sans-serif;
+    }
+
+    a#emaili {
+      font-family: sans-serif;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #ea4884;
+      width: 80%;
+      max-width: 500px;
+      z-index: 1000; /* Ensure modal is on top */
+    }
+
+    .modal form {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center items horizontally */
+      justify-content: center; /* Center items vertically */
+      height: 100%; /* Ensure the form takes full height of the modal */
+    }
+
+    .submit-btn {
+      padding: 10px;
+      background: #ea4884;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px; /* Add some spacing above the button */
+      width: 50%; /* Optional: Set a fixed width for the button */
+      text-align: center; /* Center the text inside the button */
+      font-size: 16px; /* Increased font size */
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #222;
+      color: white;
+      border: 1px solid #ea4884;
+      border-radius: 5px;
+      font-size: 16px; /* Increased font size */
+    }
+
+    .close-btn {
+        color: #ea4884;
+        font-size: 24px; /* Increased font size */
+        font-weight: bold;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        padding: 5px; /* Adds some space around the 'X' */
+        width: 30px; /* Gives it a clickable area */
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+    #applyBtn {
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+      }
+      
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 999; /* Ensure overlay is below modal but above main content */
+    }
+
+    h2 {
+      color: #ea4884;
+      text-align: center;
+      font-size: 24px; /* Increased font size */
+    }
+    
+    
+    .labeli {
+    color: white;
+    font-size: 11px;
+    font-family: system-ui;
+    align-self: self-start;
+}
+
+    .labeli2 {
+    color: white;
+    font-size: 12px;
+    font-family: system-ui;
+    align-self: self-start;
+}
+
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <a href="https://www.lojtarifundit.com/apply/player" target="_blank">
+        <ion-icon name="ellipse-outline" style="background-image:url('https://lh6.googleusercontent.com/ifZBzJoqSkd8Sm7E4mSypdkWpyGjU8sBAZ59lzB-ow2ryUY5FAdErBAyMn9Z6qQauMBDyE6sLRLd3zNU8HAEhP3ToA6D-QtYqkKLM2tDmZka0KUl71oNkXBZUGJbeyhm6zzKAHMkjdA=w740'); background-size:cover;"></ion-icon>
+      </a>
+      <span class="sq_color">Be Player</span>
+    </div>
+
+    <div class="card">
+      <a href="#" id="showAlertAdmin" onclick="event.preventDefault();">
+        <ion-icon name="triangle-outline" style="background-image: url('https://lh3.googleusercontent.com/8vVYnx49IJbUg7mJ-Nieh4qv-Qj0rRNaZ08yAaCrKBqfYfiwB_Xvr3Drf-yqL7SQ7UFcIJh4Voob6etL-s5R-IDd0JfFsMwgRFTjTrI6BfQ4PBBmsoenFV-5Dxufcb3m-F4eHk_bAcE=w740'); background-size: cover;"></ion-icon>
+      </a>
+      <span class="sq_color">Be Soldier</span>
+    </div>
+
+    <div class="card">
+      <a href="#" id="showAlertSponsor" onclick="event.preventDefault();">
+        <ion-icon name="square-outline" style="background-image: url('https://lh6.googleusercontent.com/2oWO2pQxq9ovL1YHlj5iRofNsHQjZlz0bW_h9zQy8ZAuN711oUTtweF0dcrKuB1pZ3OOObqk2B92lcfQcCBBZQAVWqFgOQlw69Me7oHCHY__aENMqkVobbF-wt3UXVtg4F1DEbEDgW4=w740'); background-size: cover;"></ion-icon>
+      </a>
+      <span class="sq_color">Be Sponsor</span>
+    </div>
+  </div>
+
+  <!-- Ionicons CDN -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
+
+
+<!-- Include SweetAlert library -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  // Function to close the modals
+  function closeModal() {
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("preliminaryModal").style.display = "none";
+    document.getElementById("modalSoldier").style.display = "none";
+  }
+
+  // Fetch data function with dynamic form values in the URL
+  function fetchData(formData) {
+    const name = formData.get('name');
+    const gender = formData.get('gender');
+    const studentId = formData.get('studentId');
+    const phoneNumber = formData.get('phoneNumber');
+    const comments = formData.get('entry.256592698');
+
+    const url = `https://script.google.com/macros/s/AKfycbwy73h0fKZZap23tqJe19IUeiZvY9pJzCWf3pTi-FHFqV6w2cdp0kPNwGYsVJnLQJw/exec?name=${encodeURIComponent(name)}&gender=${encodeURIComponent(gender)}&studentId=${encodeURIComponent(studentId)}&phoneNumber=${encodeURIComponent(phoneNumber)}&comments=${encodeURIComponent(comments)}`;
+
+    fetch(url)
+      .then(response => response.json())  // Parse the JSON response
+      .then(data => {
+        // Use SweetAlert for success message
+        Swal.fire({
+          icon: 'success',
+          title: 'Successfully Submitted!',
+          text: 'Thank you for your application, we will contact you soon!',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          // Reset the form fields after success
+          document.getElementById("squidFormSoldier").reset();
+                const submitButton = document.querySelector("button[type='submit']");
+      submitButton.disabled = false;
+      submitButton.textContent = "Submit";
+        });
+      })
+      .catch(error => {
+        // SweetAlert for error message
+        Swal.fire({
+          icon: 'error',
+          title: 'Submission Failed!',
+          text: 'There was an error submitting your application. Please try again.',
+          confirmButtonText: 'OK'
+        });
+      });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Show the preliminary modal
+    document.getElementById("showAlertAdmin").addEventListener("click", function (event) {
+      event.preventDefault();
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("preliminaryModal").style.display = "block";
+    });
+
+    // Move to Soldier Modal when applying
+    document.getElementById("applyBtn").addEventListener("click", function () {
+      document.getElementById("preliminaryModal").style.display = "none";
+      document.getElementById("modalSoldier").style.display = "block";
+    });
+
+    // Handle form submission
+    document.getElementById("squidFormSoldier").addEventListener("submit", function (event) {
+      event.preventDefault();  // Prevent form from submitting normally
+      const formData = new FormData(this);
+
+      const submitButton = document.querySelector("button[type='submit']");
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
+
+      // Call the fetchData function when form is submitted with formData
+      fetchData(formData);
+    });
+  });
+</script>
+
+<!-- Modal and Overlay -->
+<div class="overlay" id="overlay" onclick="closeModal()"></div>
+
+<!-- Preliminary Modal -->
+<div class="modal" id="preliminaryModal">
+  <span class="close-btn" onclick="closeModal()">&times;</span>
+  <p style="color: red">Epoka Students Only!</p><p style="color: red; font-size:10px">Due to frequent meetings in campus</p>
+  <br>
+  <p>We are looking for these skills:</p>
+  <br>
+  <label class="labeli2">
+    -<strong class="labeli2">Fun Spirit</strong>: Engaging and motivating others in playful games<br>
+    -<strong class="labeli2">Photoshooting</strong>: Experience taking photos.<br>
+    -<strong class="labeli2">Photoediting</strong>: Able to edit photos (Photoshop, Other).<br>
+    -<strong class="labeli2">Videoshooting</strong>: Experience filming videos.<br>
+    -<strong class="labeli2">Video Editing</strong>: Able to edit videos (Premiere Pro, CupCut, Others).<br>
+    -<strong class="labeli2">Drone Operators</strong>: Contribute with your drone in filming.<br>
+    -<strong class="labeli2">Design</strong>: Skilled in graphic design.<br>
+    -<strong class="labeli2">Production</strong>: Handmade crafts.<br>
+    -<strong class="labeli2">Electronic</strong>: Knowledge of Arduino and programming.<br>
+    -<strong class="labeli2">Programming</strong>: Websites, forms, automations.<br>
+  </label>
+  <button id="applyBtn" class="submit-btn">Apply</button>
+</div>
+
+<!-- Soldier Modal -->
+<div class="modal" id="modalSoldier">
+  <span class="close-btn" onclick="closeModal()">&times;</span>
+  <form id="squidFormSoldier">
+  <br>
+    <input type="text" name="name" placeholder="Name Surname" required>
+    <select name="gender" required>
+      <option value="">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+    <input type="number" name="studentId" placeholder="Epoka Student ID" required>
+    <input type="number" name="phoneNumber" placeholder="Phone Number" required>
+    <label class="labeli">*We are exciting to look for a strong motivation from our Pinky Soldiers. Make a short description of yourself showing your interest in becoming a soldier!</label>
+    <input type="comment" name="entry.256592698" placeholder="Motivation..." required>
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+  <p id="successMessageSoldier" style="display: none; color: #ea4884; font-weight: bold; margin-top: 20px;">Successfully Submitted!</p>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+</div>
+    <!-- Ionicons CDN -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+</body>
+</body>
+</html>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        
+        
+         document.getElementById("showAlertSponsor").addEventListener("click", function () {
+
+        Swal.fire({
+  icon: "success",
+  title: "Appreciate your interest!",
+  text: "If you like to become sponsor of this event, please email us as follows!",
+  footer: '<a href="mailto:mleti@epoka.edu.al,lojtarifundit@gmail.com?subject=Sponsorship%20Interest%20For Squid Game Albania" id="emaili">mleti@epoka.edu.al</a>'
+});
+
+        });
+        
+        
+
+        
+    </script>
+
